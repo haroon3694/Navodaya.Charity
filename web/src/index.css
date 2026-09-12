@@ -1,0 +1,208 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #fff;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: #faa93233;
+  color: #1a3c2b;
+}
+
+@keyframes nv-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes nv-bird {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(28px);
+  }
+}
+
+@keyframes nv-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-7px);
+  }
+}
+
+@keyframes nv-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 760px) {
+  /* The decorative, masked hero portrait is a background flourish behind
+     the headline on desktop; on narrow screens it has no room to sit behind
+     the text without either hiding the copy or looking cropped, so it steps
+     aside and lets the headline lead. */
+  .nv-hero-bg-portrait {
+    display: none !important;
+  }
+  .nv-grid-founder-hero {
+    grid-template-columns: 1fr !important;
+  }
+  section[style*="min-height: 88vh"] {
+    min-height: auto !important;
+    padding-top: 28px !important;
+  }
+  .nv-row {
+    grid-template-columns: 1fr !important;
+  }
+  .nv-row .nv-img {
+    order: -1;
+  }
+}
+
+/* Alternating image/text row (Programs page pillar sections) */
+.nv-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(32px, 5vw, 72px);
+  align-items: center;
+}
+
+/* ── Nav / footer link hover ── */
+.nv-link {
+  transition: color 0.2s;
+}
+.nv-link:hover {
+  color: #1a3c2b;
+}
+
+/* ── Pill / CTA button hover ── */
+.nv-btn {
+  transition: transform 0.2s, filter 0.2s;
+}
+.nv-btn:hover {
+  filter: brightness(1.05);
+}
+.nv-btn--sm:hover {
+  transform: translateY(-1px);
+}
+.nv-btn--lg:hover {
+  transform: translateY(-2px);
+}
+
+/* ── "Where We Work" region cell hover ── */
+.nv-region-cell {
+  transition: background 0.25s;
+}
+.nv-region-cell:hover {
+  background: #f4f6f2;
+}
+
+/* ── Accordion (pillar detail drop-downs) ── */
+details.nv-drop {
+  border-radius: 14px;
+  background: #faf8f3;
+  border: 1px solid #ebe5d8;
+  overflow: hidden;
+  transition: border-color 0.25s, box-shadow 0.3s, background 0.25s;
+}
+details.nv-drop[open] {
+  background: #fff;
+  border-color: #e4decc;
+  box-shadow: 0 14px 34px rgba(26, 60, 43, 0.09);
+}
+details.nv-drop summary {
+  list-style: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 15px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1a3c2b;
+  transition: background 0.2s;
+}
+details.nv-drop summary::-webkit-details-marker {
+  display: none;
+}
+details.nv-drop summary:hover {
+  background: #f2eee3;
+}
+details.nv-drop[open] summary:hover {
+  background: #fbfaf6;
+}
+details.nv-drop .nv-sumlabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+details.nv-drop .nv-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+details.nv-drop .nv-badge {
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #edefea;
+  color: #1a3c2b;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s,
+    color 0.25s;
+}
+details.nv-drop[open] .nv-badge {
+  transform: rotate(180deg);
+  background: #1a3c2b;
+  color: #fff;
+}
+details.nv-drop .nv-drop-body {
+  padding: 4px 18px 18px;
+  animation: nv-reveal 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+}
+details.nv-drop .nv-drop-body li {
+  display: flex;
+  gap: 11px;
+  font-size: 0.85rem;
+  color: #54605a;
+  line-height: 1.55;
+}
+details.nv-drop .nv-drop-body li svg {
+  flex-shrink: 0;
+  margin-top: 4px;
+}
+
+/* ── Scroll-reveal (mirrors the original data-fade behaviour) ── */
+.nv-fade {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.nv-fade--visible {
+  opacity: 1;
+  transform: none;
+}
