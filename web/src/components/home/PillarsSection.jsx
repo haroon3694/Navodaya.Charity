@@ -58,8 +58,8 @@ const pillars = [
 export default function PillarsSection() {
   return (
     <section id="pillars" style={{ padding: 'clamp(36px,5vw,60px) clamp(20px,5vw,56px)', background: '#fff', position: 'relative' }}>
-      <FadeIn style={{ maxWidth: 1080, margin: '0 auto', position: 'relative' }}>
-        <div style={{ textAlign: 'center', maxWidth: 620, margin: '0 auto clamp(40px,5vw,60px)' }}>
+      <div style={{ maxWidth: 1080, margin: '0 auto', position: 'relative' }}>
+        <FadeIn y={16} threshold={0.2} style={{ textAlign: 'center', maxWidth: 620, margin: '0 auto clamp(40px,5vw,60px)' }}>
           <Eyebrow>OUR INITIATIVES</Eyebrow>
           <h2
             style={{
@@ -74,18 +74,22 @@ export default function PillarsSection() {
           >
             Three pillars, one shared&nbsp;mission.
           </h2>
-        </div>
+        </FadeIn>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'clamp(28px,4vw,40px)', position: 'relative' }}>
-          {pillars.map((pillar) => (
-            <PillarAccordionCard key={pillar.id} {...pillar} />
+          {pillars.map((pillar, i) => (
+            <PillarAccordionCard key={pillar.id} {...pillar} delay={i * 130} />
           ))}
         </div>
 
-        <p style={{ textAlign: 'center', fontSize: '0.86rem', color: '#8a938c', lineHeight: 1.7, margin: 'clamp(36px,4vw,52px) auto 0', maxWidth: 640 }}>
+        <FadeIn
+          as="p"
+          y={16}
+          style={{ textAlign: 'center', fontSize: '0.86rem', color: '#8a938c', lineHeight: 1.7, margin: 'clamp(36px,4vw,52px) auto 0', maxWidth: 640 }}
+        >
           Working across 12 Indian states alongside leading forest departments and conservation partners.
-        </p>
-      </FadeIn>
+        </FadeIn>
+      </div>
     </section>
   );
 }

@@ -1,13 +1,17 @@
 import Eyebrow from '../common/Eyebrow';
 import FadeIn from '../common/FadeIn';
 
+const headingLines = [
+  "To convert opportunity into responsibility supporting girl empowerment and protecting India's wildlife through focused,technology-enabled interventions and community partnerships.",
+];
+
 export default function AboutTeaser() {
   return (
     <section
       id="about-intro"
       style={{ padding: 'clamp(64px,9vw,108px) clamp(20px,5vw,56px)', textAlign: 'center', background: '#fff', position: 'relative' }}
     >
-      <FadeIn style={{ maxWidth: 820, margin: '0 auto' }}>
+      <FadeIn y={16} threshold={0.18} style={{ maxWidth: 820, margin: '0 auto' }}>
         <Eyebrow style={{ marginBottom: 22 }}>About Navodaya Foundation</Eyebrow>
 
         <div style={{ fontSize: '0.78rem', letterSpacing: '0.1em', textTransform: 'uppercase', color: '#b0b7af', marginBottom: 'clamp(28px,4vw,40px)' }}>
@@ -24,14 +28,16 @@ export default function AboutTeaser() {
             fontWeight: 600,
             letterSpacing: '-0.01em',
             maxWidth: 1000,
-            textWrap: 'balance',
           }}
         >
-          To convert opportunity into responsibility supporting girl empowerment and protecting India's
-          wildlife through focused, technology-enabled interventions and community&nbsp;partnerships.
+          {headingLines.map((line, i) => (
+            <FadeIn key={line} as="span" y={12} duration={420} delay={i * 90} style={{ display: 'block' }}>
+              {line}
+            </FadeIn>
+          ))}
         </h2>
 
-        <div style={{ maxWidth: 760, margin: 'clamp(32px,4vw,44px) auto 0' }}>
+        <FadeIn y={16} delay={120} style={{ maxWidth: 760, margin: 'clamp(32px,4vw,44px) auto 0' }}>
           <p style={{ fontSize: '1rem', color: '#5f6a63', lineHeight: 1.85, margin: 0 }}>
             Navodaya began when Phaneesh Murthy and Jaya Murthy felt compelled to give back after
             benefiting from a world-class education at an affordable cost. The name{' '}
@@ -40,7 +46,7 @@ export default function AboutTeaser() {
             purpose: to open new opportunities for the people and the wildlife it serves investing where
             resources create measurable, long-lasting impact rather than spreading effort thin.
           </p>
-        </div>
+        </FadeIn>
       </FadeIn>
     </section>
   );

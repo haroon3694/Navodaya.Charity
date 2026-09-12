@@ -1,3 +1,13 @@
+:root {
+  /* Motion tokens — a small, consistent vocabulary used across every
+     reveal/hover in the site instead of one-off durations and curves. */
+  --nv-ease-premium: cubic-bezier(0.22, 0.61, 0.36, 1); /* confident, editorial ease-out */
+  --nv-ease-inout: cubic-bezier(0.45, 0.05, 0.15, 0.95);
+  --nv-dur-micro: 220ms; /* hover / active micro-interactions */
+  --nv-dur-content: 700ms; /* scroll reveals */
+  --nv-dur-hero: 1300ms; /* hero entrance */
+}
+
 html,
 body {
   margin: 0;
@@ -9,6 +19,22 @@ body {
 
 * {
   box-sizing: border-box;
+}
+
+/* Respect the OS-level reduced-motion preference above everything else:
+   every transition/animation on the site collapses to (effectively)
+   instant, rather than trying to individually gate each one. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-delay: 0s !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    transition-delay: 0s !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 ::selection {
@@ -55,6 +81,73 @@ body {
   }
 }
 
+/* ── Hero entrance ── */
+@keyframes nv-hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.nv-hero-rise {
+  opacity: 0;
+  animation: nv-hero-rise 850ms var(--nv-ease-premium) both;
+}
+
+/* Editorial line-mask reveal for the hero headline: each line sits inside
+   an overflow-hidden mask and slides up from below it. */
+@keyframes nv-line-reveal {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+.nv-line-mask {
+  display: block;
+  overflow: hidden;
+}
+
+.nv-line-mask__inner {
+  display: block;
+  animation: nv-line-reveal 900ms var(--nv-ease-premium) both;
+}
+
+/* ── Hero illustration: enter once, then breathe almost imperceptibly ── */
+@keyframes nv-illustration-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes nv-illustration-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3.5px);
+  }
+}
+
+.nv-hero-illustration {
+  opacity: 0;
+  transform: translateY(20px) scale(0.97);
+  animation: nv-illustration-in 1300ms var(--nv-ease-premium) 250ms both,
+    nv-illustration-float 9s var(--nv-ease-inout) 1600ms infinite;
+}
+
 @media (max-width: 760px) {
   /* The decorative, masked hero portrait is a background flourish behind
      the headline on desktop; on narrow screens it has no room to sit behind
@@ -96,16 +189,30 @@ body {
 
 /* ── Pill / CTA button hover ── */
 .nv-btn {
-  transition: transform 0.2s, filter 0.2s;
+  transition: transform var(--nv-dur-micro, 220ms) var(--nv-ease-premium),
+    filter var(--nv-dur-micro, 220ms) var(--nv-ease-premium),
+    box-shadow var(--nv-dur-micro, 220ms) var(--nv-ease-premium);
 }
 .nv-btn:hover {
   filter: brightness(1.05);
+  box-shadow: 0 10px 24px rgba(26, 60, 43, 0.18);
 }
 .nv-btn--sm:hover {
   transform: translateY(-1px);
 }
 .nv-btn--lg:hover {
   transform: translateY(-2px);
+}
+.nv-btn:active {
+  transform: scale(0.97);
+  box-shadow: 0 4px 10px rgba(26, 60, 43, 0.14);
+}
+.nv-btn__arrow {
+  display: inline-block;
+  transition: transform var(--nv-dur-micro, 220ms) var(--nv-ease-premium);
+}
+.nv-btn:hover .nv-btn__arrow {
+  transform: translateX(4px);
 }
 
 /* ── "Where We Work" region cell hover ── */
@@ -116,21 +223,26 @@ body {
   background: #f4f6f2;
 }
 
-/* ── Accordion (pillar detail drop-downs) ── */
-details.nv-drop {
+/* ── Accordion (pillar detail drop-downs) ──
+   A button + animated grid-rows panel rather than native <details>, so the
+   open AND close both animate smoothly (height, fade and chevron) instead
+   of the instant native toggle. */
+.nv-drop2 {
   border-radius: 14px;
   background: #faf8f3;
   border: 1px solid #ebe5d8;
   overflow: hidden;
   transition: border-color 0.25s, box-shadow 0.3s, background 0.25s;
 }
-details.nv-drop[open] {
+.nv-drop2--open {
   background: #fff;
   border-color: #e4decc;
   box-shadow: 0 14px 34px rgba(26, 60, 43, 0.09);
 }
-details.nv-drop summary {
-  list-style: none;
+.nv-drop2__summary {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -140,29 +252,35 @@ details.nv-drop summary {
   font-size: 0.85rem;
   font-weight: 600;
   color: #1a3c2b;
-  transition: background 0.2s;
+  transition: background 0.2s, transform var(--nv-dur-micro, 220ms) var(--nv-ease-premium);
 }
-details.nv-drop summary::-webkit-details-marker {
-  display: none;
-}
-details.nv-drop summary:hover {
+.nv-drop2__summary:hover {
   background: #f2eee3;
 }
-details.nv-drop[open] summary:hover {
+.nv-drop2--open .nv-drop2__summary:hover {
   background: #fbfaf6;
 }
-details.nv-drop .nv-sumlabel {
+.nv-drop2__summary:focus-visible {
+  outline: 2px solid #1a3c2b;
+  outline-offset: -2px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .nv-drop2__summary:hover {
+    transform: translateY(-1px);
+  }
+}
+.nv-sumlabel {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-details.nv-drop .nv-dot {
+.nv-dot {
   width: 7px;
   height: 7px;
   border-radius: 50%;
   flex-shrink: 0;
 }
-details.nv-drop .nv-badge {
+.nv-badge {
   width: 27px;
   height: 27px;
   border-radius: 50%;
@@ -175,34 +293,137 @@ details.nv-drop .nv-badge {
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), background 0.25s,
     color 0.25s;
 }
-details.nv-drop[open] .nv-badge {
+.nv-drop2--open .nv-badge {
   transform: rotate(180deg);
   background: #1a3c2b;
   color: #fff;
 }
-details.nv-drop .nv-drop-body {
-  padding: 4px 18px 18px;
-  animation: nv-reveal 0.34s cubic-bezier(0.4, 0, 0.2, 1);
+/* The 0fr → 1fr grid-row trick animates from-auto height smoothly without
+   JS measuring the content. */
+.nv-drop2__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s var(--nv-ease-premium);
 }
-details.nv-drop .nv-drop-body li {
+.nv-drop2--open .nv-drop2__panel {
+  grid-template-rows: 1fr;
+}
+.nv-drop2__panel-inner {
+  overflow: hidden;
+  min-height: 0;
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+.nv-drop2--open .nv-drop2__panel-inner {
+  opacity: 1;
+  transform: none;
+  transition-delay: 0.05s;
+}
+.nv-drop-body {
+  padding: 4px 18px 18px;
+}
+.nv-drop-body li {
   display: flex;
   gap: 11px;
   font-size: 0.85rem;
   color: #54605a;
   line-height: 1.55;
 }
-details.nv-drop .nv-drop-body li svg {
+.nv-drop-body li svg {
   flex-shrink: 0;
   margin-top: 4px;
 }
 
-/* ── Scroll-reveal (mirrors the original data-fade behaviour) ── */
+/* ── Pillar illustration hover (desktop only — no cursor on touch) ── */
+.nv-pillar-figure {
+  transition: transform var(--nv-dur-micro, 220ms) var(--nv-ease-premium);
+}
+@media (hover: hover) and (pointer: fine) {
+  .nv-pillar-figure:hover {
+    transform: translateY(-3px) scale(1.03);
+  }
+}
+
+/* ── Scroll-reveal system ──
+   The base `.nv-fade` mirrors the original data-fade behaviour exactly
+   (22px rise, 0.7s ease) so every existing call site is unaffected; pass
+   `y`/`duration`/`delay` props on <FadeIn> to opt into the tighter, staggered
+   reveals used on the home page (16px rise, premium ease-out). */
 .nv-fade {
+  --nv-fade-y: 22px;
+  --nv-fade-dur: 0.7s;
   opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transform: translateY(var(--nv-fade-y));
+  transition: opacity var(--nv-fade-dur) var(--nv-ease-inout, ease),
+    transform var(--nv-fade-dur) var(--nv-ease-inout, ease);
 }
 .nv-fade--visible {
   opacity: 1;
   transform: none;
+}
+/* Gentle scale-in, for illustrations/icons/cards. */
+.nv-fade--scale {
+  transform: translateY(var(--nv-fade-y)) scale(0.94);
+}
+.nv-fade--scale.nv-fade--visible {
+  transform: none;
+}
+
+/* ── Thin top-of-viewport scroll-progress indicator ── */
+.nv-scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform-origin: 0 50%;
+  background: #7cb342;
+  z-index: 200;
+  pointer-events: none;
+  transition: transform 80ms linear;
+}
+
+/* ── Nav link underline hover ── */
+.nv-nav-link {
+  position: relative;
+  padding-bottom: 2px;
+}
+.nv-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--nv-dur-micro, 220ms) var(--nv-ease-premium);
+}
+.nv-nav-link:hover::after,
+.nv-nav-link:focus-visible::after {
+  transform: scaleX(1);
+}
+
+/* ── Footer link underline hover (in addition to the colour change) ── */
+.nv-link {
+  position: relative;
+}
+.nv-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  width: 100%;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform var(--nv-dur-micro, 220ms) var(--nv-ease-premium);
+}
+.nv-link:hover::after,
+.nv-link:focus-visible::after {
+  transform: scaleX(1);
 }

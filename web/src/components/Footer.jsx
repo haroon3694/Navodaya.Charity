@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import FadeIn from './common/FadeIn';
 import { footerColumns } from '../data/content';
 
 export default function Footer() {
@@ -17,7 +18,7 @@ export default function Footer() {
           marginBottom: 44,
         }}
       >
-        <div style={{ gridColumn: 'span 2', minWidth: 240 }}>
+        <FadeIn y={10} duration={550} threshold={0.15} style={{ gridColumn: 'span 2', minWidth: 240 }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 14 }}>
             <span style={{ fontFamily: "'Playfair Display', serif", fontWeight: 700, fontSize: '1.1rem', color: '#233027' }}>
               Navodaya Foundation
@@ -26,21 +27,21 @@ export default function Footer() {
           <p style={{ fontSize: '0.86rem', color: '#8a938c', lineHeight: 1.7, margin: 0, maxWidth: 320 }}>
             A new dawn for wildlife and India's people. Empowering Lives · Protecting Nature.
           </p>
-        </div>
+        </FadeIn>
 
-        {footerColumns.map((column) => (
-          <div key={column.title}>
+        {footerColumns.map((column, i) => (
+          <FadeIn key={column.title} y={10} duration={550} delay={80 + i * 70} threshold={0.15}>
             <h5 style={{ fontSize: '0.68rem', fontWeight: 600, letterSpacing: '0.13em', textTransform: 'uppercase', color: '#C77A14', margin: '0 0 16px' }}>
               {column.title}
             </h5>
             <div style={{ display: 'flex', flexDirection: 'column', gap: 11 }}>
               {column.links.map((link) => (
-                <Link key={link.label} to={link.to} className="nv-link" style={{ fontSize: '0.86rem', color: '#6a756e', textDecoration: 'none' }}>
+                <Link key={link.label} to={link.to} className="nv-link" style={{ fontSize: '0.86rem', color: '#6a756e', textDecoration: 'none', width: 'fit-content' }}>
                   {link.label}
                 </Link>
               ))}
             </div>
-          </div>
+          </FadeIn>
         ))}
       </div>
 

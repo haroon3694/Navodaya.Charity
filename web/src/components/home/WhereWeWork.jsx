@@ -15,8 +15,8 @@ const regions = [
 export default function WhereWeWork() {
   return (
     <section style={{ padding: 'clamp(64px,8vw,104px) clamp(20px,5vw,56px)', background: '#F9F6F0', borderTop: '1px solid #EFE9DD', borderBottom: '1px solid #EFE9DD' }}>
-      <FadeIn style={{ maxWidth: 1080, margin: '0 auto' }}>
-        <div style={{ textAlign: 'center', maxWidth: 900, margin: '0 auto clamp(40px,5vw,56px)' }}>
+      <div style={{ maxWidth: 1080, margin: '0 auto' }}>
+        <FadeIn y={16} threshold={0.18} style={{ textAlign: 'center', maxWidth: 900, margin: '0 auto clamp(40px,5vw,56px)' }}>
           <Eyebrow>Where We Work</Eyebrow>
           <h2
             style={{
@@ -35,21 +35,21 @@ export default function WhereWeWork() {
             From tiger corridors to rural classrooms, Navodaya works across the full landscape of India's
             people and wildlife.
           </p>
-        </div>
+        </FadeIn>
 
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 22 }}>
-          {regions.map((region) => (
-            <div key={region.label} style={{ padding: '20px 26px', textAlign: 'center' }}>
+          {regions.map((region, i) => (
+            <FadeIn key={region.label} variant="scale" y={12} duration={550} delay={i * 100} threshold={0.2} style={{ padding: '20px 26px', textAlign: 'center' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px' }}>
                 <img src={region.icon} alt={region.alt} style={{ width: 88, height: 88, objectFit: 'contain' }} />
               </span>
               <h3 style={{ fontFamily: "'Playfair Display', serif", fontSize: '1.14rem', color: '#233027', margin: 0, fontWeight: 600 }}>
                 {region.label}
               </h3>
-            </div>
+            </FadeIn>
           ))}
         </div>
-      </FadeIn>
+      </div>
     </section>
   );
 }

@@ -22,7 +22,10 @@ export function useParallax(speed = 0.15, base = '') {
 
     const apply = () => {
       ticking = false;
-      const anchor = el.closest('section') || el.parentElement || el;
+      // Prefer an explicit, closer anchor (e.g. one row of several sharing a
+      // single <section>) over the nearest <section>, which may be far
+      // taller than the element itself and produce an oversized offset.
+      const anchor = el.closest('[data-parallax-anchor]') || el.closest('section') || el.parentElement || el;
       const rect = anchor.getBoundingClientRect();
       const vh = window.innerHeight || 800;
       const center = rect.top + rect.height / 2 - vh / 2;
