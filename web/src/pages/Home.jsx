@@ -1,4 +1,5 @@
 import Nav from '../components/Nav';
+import ScrollProgress from '../components/ScrollProgress';
 import Hero from '../components/home/Hero';
 import PillarsSection from '../components/home/PillarsSection';
 import AboutTeaser from '../components/home/AboutTeaser';
@@ -10,6 +11,7 @@ import Footer from '../components/Footer';
 export default function Home() {
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#fff', fontFamily: "'Inter', system-ui, sans-serif", color: '#3a463f', overflowX: 'hidden' }}>
+      <ScrollProgress />
       <Nav transparentOnTop />
       <Hero />
       <PillarsSection />

@@ -70,7 +70,7 @@ function PillarRow({ row }) {
     </div>
   );
   return (
-    <div data-fade="1" className="nv-row">
+    <div data-fade="1" data-parallax-anchor className="nv-row">
       {row.imageFirst ? [image, text] : [text, image]}
     </div>
   );

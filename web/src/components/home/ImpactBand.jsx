@@ -10,17 +10,21 @@ const stats = [
 ];
 
 export default function ImpactBand() {
-  const { ref, visible } = useFadeIn();
+  const { ref, visible } = useFadeIn({ threshold: 0.18 });
 
   return (
     <section style={{ padding: 'clamp(56px,7vw,96px) clamp(20px,5vw,56px)', background: '#16382A', textAlign: 'center' }}>
-      <div ref={ref} className={`nv-fade ${visible ? 'nv-fade--visible' : ''}`} style={{ maxWidth: 1080, margin: '0 auto' }}>
+      <div
+        ref={ref}
+        className={`nv-fade ${visible ? 'nv-fade--visible' : ''}`}
+        style={{ '--nv-fade-y': '16px', maxWidth: 1080, margin: '0 auto' }}
+      >
         <Eyebrow color="#E6B66A" style={{ marginBottom: 'clamp(32px,4vw,48px)' }}>
           Our Impact
         </Eyebrow>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'clamp(28px,4vw,48px)' }}>
           {stats.map((stat) => (
-            <StatCounter key={stat.label} {...stat} start={visible} />
+            <StatCounter key={stat.label} {...stat} start={visible} duration={1200} />
           ))}
         </div>
       </div>

@@ -44,7 +44,7 @@ export default function Nav({ transparentOnTop = false }) {
       </NavLink>
       <div style={{ display: 'flex', alignItems: 'center', gap: 'clamp(14px,2.4vw,34px)' }}>
         {navLinks.map((link) => (
-          <NavLink key={link.to} to={link.to} style={linkStyle}>
+          <NavLink key={link.to} to={link.to} className="nv-nav-link" style={linkStyle}>
             {link.label}
           </NavLink>
         ))}
