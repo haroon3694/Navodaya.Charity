@@ -83,7 +83,7 @@ export default function ForCommunities() {
               Small projects, deep&nbsp;trust.
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 22 }}>
+          <div className="nv-grid-2up-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 22 }}>
             {whatWeDo.map((item) => (
               <IconFeatureCard key={item.title} icon={item.icon} title={item.title} iconSize={84}>
                 {item.text}

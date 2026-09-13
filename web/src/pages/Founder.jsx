@@ -87,7 +87,7 @@ export default function Founder() {
             Primentor and advises a portfolio of technology companies. The through-line across every
             chapter is a belief he returns to often: focus intensely on one thing and do it completely.
           </p>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 1, background: '#ECE7DE', border: '1px solid #ECE7DE', borderRadius: 20, overflow: 'hidden', marginTop: 'clamp(32px,4vw,44px)' }}>
+          <div className="nv-grid-stack-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 1, background: '#ECE7DE', border: '1px solid #ECE7DE', borderRadius: 20, overflow: 'hidden', marginTop: 'clamp(32px,4vw,44px)' }}>
             {milestones.map((m) => (
               <div key={m.label} style={{ background: '#FAF8F3', padding: '28px 24px' }}>
                 <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', width: 82, height: 36, marginBottom: 14 }}>
@@ -131,7 +131,7 @@ export default function Founder() {
           <div style={{ fontSize: '0.72rem', fontWeight: 600, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#E6B66A', marginBottom: 20 }}>
             Quotes from Phaneesh Murthy
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(18px,2vw,24px)' }}>
+          <div className="nv-grid-stack-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: 'clamp(18px,2vw,24px)' }}>
             {quotes.map(([line1, line2]) => (
               <QuoteCard
                 key={line1}
@@ -183,7 +183,7 @@ export default function Founder() {
               Three principles that guide the&nbsp;work.
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 22 }}>
+          <div className="nv-grid-stack-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 22 }}>
             {principles.map((p) => (
               <IconFeatureCard key={p.title} icon={p.icon} title={p.title} iconSize={56} bg="#fff">
                 {p.text}

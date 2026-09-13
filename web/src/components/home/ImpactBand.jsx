@@ -22,7 +22,7 @@ export default function ImpactBand() {
         <Eyebrow color="#E6B66A" style={{ marginBottom: 'clamp(32px,4vw,48px)' }}>
           Our Impact
         </Eyebrow>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'clamp(28px,4vw,48px)' }}>
+        <div className="nv-grid-2up-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 'clamp(28px,4vw,48px)' }}>
           {stats.map((stat) => (
             <StatCounter key={stat.label} {...stat} start={visible} duration={1200} />
           ))}

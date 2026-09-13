@@ -156,9 +156,6 @@ body {
   .nv-hero-bg-portrait {
     display: none !important;
   }
-  .nv-grid-founder-hero {
-    grid-template-columns: 1fr !important;
-  }
   section[style*="min-height: 88vh"] {
     min-height: auto !important;
     padding-top: 28px !important;
@@ -168,6 +165,24 @@ body {
   }
   .nv-row .nv-img {
     order: -1;
+  }
+}
+
+/* Portrait tablets (iPad/Surface in portrait) — and phones turned to
+   landscape — sit in an in-between width band: wide enough for an
+   `auto-fit` grid to fit 2 of 3 (or 3 of 4/5) cards per row, which strands
+   the last one alone, off-centre, with a card background/border that makes
+   the gap obvious. Landscape tablets (1024px+) have plenty of width for
+   every card on one row, so the landscape clause is capped well below that. */
+@media (max-width: 1024px) and (orientation: portrait), (max-width: 940px) and (orientation: landscape) {
+  .nv-grid-founder-hero,
+  .nv-grid-stack-tablet {
+    grid-template-columns: 1fr !important;
+  }
+  /* Even-numbered card sets read better as a clean 2×2 than a single long
+     column or a stranded odd-one-out row. */
+  .nv-grid-2up-tablet {
+    grid-template-columns: repeat(2, 1fr) !important;
   }
 }
 

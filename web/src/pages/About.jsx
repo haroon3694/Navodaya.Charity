@@ -171,7 +171,7 @@ export default function About() {
               The principles behind every&nbsp;decision.
             </h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 22 }}>
+          <div className="nv-grid-2up-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 22 }}>
             {values.map((v) => (
               <IconFeatureCard
                 key={v.title}

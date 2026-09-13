@@ -37,7 +37,7 @@ export default function WhereWeWork() {
           </p>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 22 }}>
+        <div className="nv-grid-2up-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(210px, 1fr))', gap: 22 }}>
           {regions.map((region, i) => (
             <FadeIn key={region.label} variant="scale" y={12} duration={550} delay={i * 100} threshold={0.2} style={{ padding: '20px 26px', textAlign: 'center' }}>
               <span style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px' }}>

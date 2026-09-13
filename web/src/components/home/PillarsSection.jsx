@@ -76,7 +76,7 @@ export default function PillarsSection() {
           </h2>
         </FadeIn>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'clamp(28px,4vw,40px)', position: 'relative' }}>
+        <div className="nv-grid-stack-tablet" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: 'clamp(28px,4vw,40px)', position: 'relative' }}>
           {pillars.map((pillar, i) => (
             <PillarAccordionCard key={pillar.id} {...pillar} delay={i * 130} />
           ))}
