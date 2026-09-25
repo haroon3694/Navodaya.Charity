@@ -3,6 +3,7 @@ import Footer from '../components/Footer';
 import FadeIn from '../components/common/FadeIn';
 import TagLink from '../components/common/TagLink';
 import { useParallax } from '../hooks/useParallax';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
 import photoTiger from '../assets/images/photo-tiger-jungle.webp';
 import photoGirlFist from '../assets/images/photo-girl-fist.webp';
@@ -77,6 +78,13 @@ function PillarRow({ row }) {
 }
 
 export default function Programs() {
+  useDocumentHead({
+    title: 'Our Initiatives | Navodaya Foundation',
+    description:
+      "Navodaya Foundation's three pillars: tiger conservation for wildlife, education and empowerment for girls, and livelihood programs for forest-edge communities, led by Phaneesh Murthy and Jaya Murthy.",
+    path: '/programs',
+  });
+
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#fff', fontFamily: "'Inter', system-ui, sans-serif", color: '#3a463f', overflowX: 'hidden' }}>
       <Nav />

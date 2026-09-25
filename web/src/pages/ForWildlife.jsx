@@ -7,6 +7,7 @@ import TagLink from '../components/common/TagLink';
 import StatCounter from '../components/common/StatCounter';
 import { useParallax } from '../hooks/useParallax';
 import { useFadeIn } from '../hooks/useFadeIn';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
 import photoTiger from '../assets/images/photo-tiger-jungle.webp';
 import photoKabini from '../assets/images/photo-kabini-jungle.png';
@@ -63,6 +64,12 @@ function RecoveryStats() {
 
 export default function ForWildlife() {
   const heroImgRef = useParallax(0.2);
+  useDocumentHead({
+    title: "Wildlife Conservation | Phaneesh Murthy's Tiger Work — Navodaya Foundation",
+    description:
+      "Phaneesh Murthy's tiger conservation work at Navodaya Foundation (Navodaya Charity): thermal drones, camera-trap networks, and AI-assisted monitoring protecting India's tigers at Nagarahole and Kabini.",
+    path: '/for-wildlife',
+  });
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#fff', fontFamily: "'Inter', system-ui, sans-serif", color: '#3a463f', overflowX: 'hidden' }}>

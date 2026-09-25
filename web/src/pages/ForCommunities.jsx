@@ -5,6 +5,7 @@ import FadeIn from '../components/common/FadeIn';
 import IconFeatureCard from '../components/common/IconFeatureCard';
 import TagLink from '../components/common/TagLink';
 import { useParallax } from '../hooks/useParallax';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
 import photoRangers from '../assets/images/photo-forest-rangers.webp';
 import iconRuralHealthcare from '../assets/images/icon-rural-healthcare.png';
@@ -26,6 +27,12 @@ const tests = [
 
 export default function ForCommunities() {
   const heroImgRef = useParallax(0.2);
+  useDocumentHead({
+    title: 'Community Programs | Navodaya Foundation',
+    description:
+      "Navodaya Foundation's (Navodaya Charity) community programs: rural healthcare pilots, livelihood training, and athlete support for the forest-edge communities that surround India's tiger reserves.",
+    path: '/for-communities',
+  });
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#fff', fontFamily: "'Inter', system-ui, sans-serif", color: '#3a463f', overflowX: 'hidden' }}>

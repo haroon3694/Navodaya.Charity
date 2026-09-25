@@ -6,6 +6,7 @@ import IconFeatureCard from '../components/common/IconFeatureCard';
 import QuoteCard from '../components/common/QuoteCard';
 import TagLink from '../components/common/TagLink';
 import { useParallax } from '../hooks/useParallax';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
 import photoGirlFist from '../assets/images/photo-girl-fist.webp';
 import iconScholarships from '../assets/images/icon-scholarships.png';
@@ -22,6 +23,12 @@ const whatWeDo = [
 
 export default function ForGirlEmpowerment() {
   const heroImgRef = useParallax(0.2);
+  useDocumentHead({
+    title: "Girl Empowerment | Jaya Murthy's Charter — Navodaya Foundation",
+    description:
+      "Jaya Murthy leads Navodaya Foundation's (Navodaya Charity) girl-empowerment charter — scholarships, laptops, safe hostels, and mentorship for young women from underserved communities across India.",
+    path: '/for-girl-empowerment',
+  });
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#fff', fontFamily: "'Inter', system-ui, sans-serif", color: '#3a463f', overflowX: 'hidden' }}>

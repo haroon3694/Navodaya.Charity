@@ -6,6 +6,7 @@ import QuoteCard from '../components/common/QuoteCard';
 import IconFeatureCard from '../components/common/IconFeatureCard';
 import PillButton from '../components/common/PillButton';
 import { useParallax } from '../hooks/useParallax';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
 import portraitFull from '../assets/images/portrait-founder-full.png';
 import logoInfosys from '../assets/images/logo-infosys.png';
@@ -37,6 +38,12 @@ const principles = [
 export default function Founder() {
   const portraitRef = useParallax(0.16);
   const leadsImgRef = useParallax(0.2);
+  useDocumentHead({
+    title: 'Phaneesh Murthy — Founder, Navodaya Foundation',
+    description:
+      'Phaneesh Murthy is the founder of Navodaya Foundation (Navodaya Charity), a technology entrepreneur and philanthropist who co-founded the foundation with his wife, Jaya Murthy, leading its tiger conservation and technology-driven work.',
+    path: '/founder',
+  });
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#fff', fontFamily: "'Inter', system-ui, sans-serif", color: '#3a463f', overflowX: 'hidden' }}>

@@ -6,6 +6,7 @@ import QuoteCard from '../components/common/QuoteCard';
 import IconFeatureCard from '../components/common/IconFeatureCard';
 import PillButton from '../components/common/PillButton';
 import { useParallax } from '../hooks/useParallax';
+import { useDocumentHead } from '../hooks/useDocumentHead';
 
 import aboutHeroBg from '../assets/images/about-hero-bg.png';
 import gratitudeWoman from '../assets/images/photo-gratitude-woman.webp';
@@ -24,6 +25,12 @@ const values = [
 
 export default function About() {
   const storyImgRef = useParallax(0.2);
+  useDocumentHead({
+    title: 'About Navodaya Foundation | Founded by Phaneesh Murthy & Jaya Murthy',
+    description:
+      "The story behind Navodaya Foundation (Navodaya Charity): why Phaneesh Murthy and Jaya Murthy started it, the mission behind the name, and the values that guide India's tiger conservation and girl-empowerment work.",
+    path: '/about',
+  });
 
   return (
     <div style={{ position: 'relative', minHeight: '100vh', background: '#fff', fontFamily: "'Inter', system-ui, sans-serif", color: '#3a463f', overflowX: 'hidden' }}>
